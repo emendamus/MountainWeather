@@ -12,7 +12,10 @@ namespace Silkweb.Mobile.MountainWeather.Services
     public class MountainWeatherService : IMountainWeatherService
     {
         private const string BaseUrL = "http://datapoint.metoffice.gov.uk/public/data/";
-        private const string Key = "c7bbe567-e118-4794-ad46-5e235ff1e781";
+
+        // Key provided by Met Office Datapoint service. 
+        // Please obtain a free key from http://www.metoffice.gov.uk/datapoint
+        private const string Key = "place met office datapoint api key here";
 
         public async Task<ForecastCapability[]> GetCapabilities()
         {
