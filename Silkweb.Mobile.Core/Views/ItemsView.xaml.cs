@@ -66,20 +66,39 @@ namespace Silkweb.Mobile.Core.Views
             SelectedItem = ItemsSource.Cast<object>().FirstOrDefault();
         }
 
+        void OnSelected(object sender, EventArgs e)
+        {
+            SetSelectedItems(sender);
+        }
+
         private View GetItemView(object item)
         {
             var content = ItemTemplate.CreateContent();
             var view = content as View;
             view.BindingContext = item;
 
-            view.GestureRecognizers.Add(new TapGestureRecognizer
-                { 
-                    Command = _selectedCommand, 
-                    CommandParameter = item as object,
-                    NumberOfTapsRequired = 1
-                });
+            var gesture = new TapGestureRecognizer
+            { 
+                Command = _selectedCommand, 
+                CommandParameter = item as object
+            };
+
+            AddGesture(view, gesture);
 
             return view;
+        }
+
+        private void AddGesture(View view, TapGestureRecognizer gesture)
+        {
+            view.GestureRecognizers.Add(gesture);
+
+            var layout = view as Layout<View>;
+
+            if (layout == null)
+                return;
+
+            foreach (var child in layout.Children)
+                AddGesture(child, gesture);
         }
 
         private static void OnSelectedItemChanged(BindableObject bindable, object oldValue, object newValue)
@@ -89,15 +108,21 @@ namespace Silkweb.Mobile.Core.Views
             if (newValue == oldValue)
                 return;
 
-            var items = itemsView.ItemsSource.OfType<ISelectable>();
+            itemsView.SetSelectedItems(newValue);
+        }
+
+        private void SetSelectedItems(object selectedItem)
+        {
+            var items = ItemsSource.OfType<ISelectable>();
 
             foreach (var item in items)
-                item.IsSelected = item == newValue;
+                item.IsSelected = item == selectedItem;
 
-            var handler = itemsView.SelectedItemChanged;
+            var handler = SelectedItemChanged;
             if (handler != null)
-                handler(itemsView, EventArgs.Empty);
+                handler(this, EventArgs.Empty);
         }
+
     }
 }
 

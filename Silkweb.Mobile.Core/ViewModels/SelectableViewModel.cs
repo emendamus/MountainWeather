@@ -1,7 +1,4 @@
-﻿using System;
-using Silkweb.Mobile.Core.ViewModels;
-using System.Windows.Input;
-using Xamarin.Forms;
+﻿using Silkweb.Mobile.Core.ViewModels;
 using Silkweb.Mobile.Core.Interfaces;
 
 namespace Silkweb.Mobile.Core.ViewModels
@@ -13,7 +10,7 @@ namespace Silkweb.Mobile.Core.ViewModels
         public bool IsSelected
         {
             get { return _isSelected; }
-            set { SetProperty(ref _isSelected, value); }
+            set  {  SetProperty(ref _isSelected, value); }
         }
     }
 }
