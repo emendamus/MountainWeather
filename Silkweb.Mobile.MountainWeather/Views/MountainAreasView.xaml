@@ -12,13 +12,11 @@
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
-		<ListView ItemsSource="{Binding Areas}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-				  BackgroundColor="{ex:ApplicationResource backgroundColor}">
+		<ListView ItemsSource="{Binding Areas}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 			<ListView.ItemTemplate>
 				<DataTemplate>
-					<cv:TextCellExtended TextColor="{ex:ApplicationResource textColor}" Text="{Binding Name}" 
-										 ShowDisclosure="True" Command="{Binding ShowForecastCommand}"
-										 SelectedBackgroundColor="{ex:ApplicationResource highlightColor}" />
+					<cv:TextCellExtended Text="{Binding Name}" 
+										 ShowDisclosure="True" Command="{Binding ShowForecastCommand}" />
 				</DataTemplate>
 			</ListView.ItemTemplate>
 		</ListView>

@@ -5,6 +5,7 @@
   xmlns:cv="clr-namespace:Silkweb.Mobile.Core.Views;assembly=Silkweb.Mobile.Core"    
   xmlns:ex="clr-namespace:Silkweb.Mobile.Core.Extensions;assembly=Silkweb.Mobile.Core" 
   xmlns:cc="clr-namespace:Silkweb.Mobile.Core.Converters;assembly=Silkweb.Mobile.Core" 
+  xmlns:behaviors="clr-namespace:Silkweb.Mobile.Core.Behaviors;assembly=Silkweb.Mobile.Core"
   x:Class="Silkweb.Mobile.MountainWeather.Views.ForecastView" 
   IsClippedToBounds="true">
 
@@ -29,45 +30,53 @@
 	</ContentView.Resources>
 	<StackLayout Spacing="0" Padding="5">
 		<StackLayout Spacing="0">
-			<Label Text="{Binding Title}" Font="Bold, Large" TextColor="{ex:ApplicationResource accentColor}" />
-			<Label Text="{Binding IssuedBy}" Font="Micro" TextColor="{ex:ApplicationResource textColor}" />
+			<Label Text="{Binding Title}" Style="{StaticResource largeHeaderStyle}" />
+			<Label Text="{Binding IssuedBy}" Style="{StaticResource microTextStyle}"  />
 		</StackLayout>
 		<ScrollView Orientation="Vertical" IsClippedToBounds="true">
 			<StackLayout Spacing="0">
 
 				<cv:ItemsView IsClippedToBounds="true" ItemsSource="{Binding WeatherPeriods}" ItemTemplate="{StaticResource itemItemplate}"
 					IsVisible="{Binding WeatherPeriods, Converter={StaticResource nullToVisibilityConverter}}" />
+
+					<!-- Alternative using ItemsSourceBehavior -->
+
+<!--				<StackLayout>
+					<StackLayout.Behaviors>
+						<behaviors:ItemsSourceBehavior ItemsSource="{Binding WeatherPeriods}" ItemTemplate="{StaticResource itemItemplate}" />
+					</StackLayout.Behaviors>
+				</StackLayout>-->
 				
 				<StackLayout VerticalOptions="FillAndExpand" Spacing="10">
 					<StackLayout Spacing="0">
-						<Label Text="Summary" Font="Bold, Medium" TextColor="{ex:ApplicationResource accentColor}" />
-						<Label Text="{Binding Weather}" Font="Small" TextColor="{ex:ApplicationResource textColor}" />
+						<Label Text="Summary" Style="{StaticResource headerStyle}" />
+						<Label Text="{Binding Weather}" Style="{StaticResource textStyle}" />
 					</StackLayout>
 					<StackLayout Spacing="0">
-						<Label Text="Visibility" Font="Bold, Medium" TextColor="{ex:ApplicationResource accentColor}" />
-						<Label Text="{Binding Forecast.Visibility}" Font="Small" TextColor="{ex:ApplicationResource textColor}" />
+						<Label Text="Visibility" Style="{StaticResource headerStyle}" />
+						<Label Text="{Binding Forecast.Visibility}" Style="{StaticResource textStyle}" />
 					</StackLayout>
 					<StackLayout Spacing="0">
-						<Label Text="Hill Fog" Font="Bold, Medium" TextColor="{ex:ApplicationResource accentColor}" />
-						<Label Text="{Binding Forecast.HillFog}" Font="Small" TextColor="{ex:ApplicationResource textColor}" />
+						<Label Text="Hill Fog" Style="{StaticResource headerStyle}" />
+						<Label Text="{Binding Forecast.HillFog}" Style="{StaticResource textStyle}" />
 					</StackLayout>
 					<StackLayout Spacing="0">
-						<Label Text="{Binding Forecast.MaxWindLevel, StringFormat='Max wind above {0}'}" Font="Bold, Medium" TextColor="{ex:ApplicationResource accentColor}" />
-						<Label Text="{Binding Forecast.MaxWind}" Font="Small" TextColor="{ex:ApplicationResource textColor}" />
+						<Label Text="{Binding Forecast.MaxWindLevel, StringFormat='Max wind above {0}'}" Style="{StaticResource headerStyle}" />
+						<Label Text="{Binding Forecast.MaxWind}" Style="{StaticResource textStyle}" />
 					</StackLayout>
 					<StackLayout Spacing="5">
-						<Label Text="Temperature" Font="Bold, Medium" TextColor="{ex:ApplicationResource accentColor}" />
+						<Label Text="Temperature" Style="{StaticResource headerStyle}" />
 						<StackLayout Spacing="0">
-							<Label Text="Freezing level:" Font="Bold, Small" TextColor="{ex:ApplicationResource accentColor}" />
-							<Label Text="{Binding Forecast.FreezingLevel}" Font="Small" TextColor="{ex:ApplicationResource textColor}" />
+							<Label Text="Freezing level:" Style="{StaticResource smallHeaderStyle}" />
+							<Label Text="{Binding Forecast.FreezingLevel}" Style="{StaticResource textStyle}" />
 						</StackLayout>
 						<StackLayout Spacing="0">
-							<Label Text="Above 900m:" Font="Bold, Small" TextColor="{ex:ApplicationResource accentColor}" />
-							<Label Text="{Binding Forecast.TempHighLevel}" Font="Small" TextColor="{ex:ApplicationResource textColor}" />
+							<Label Text="Above 900m:" Style="{StaticResource smallHeaderStyle}" />
+							<Label Text="{Binding Forecast.TempHighLevel}" Style="{StaticResource textStyle}" />
 						</StackLayout>
 						<StackLayout Spacing="0">
-							<Label Text="Low level:" Font="Bold, Small" TextColor="{ex:ApplicationResource accentColor}" />
-							<Label Text="{Binding Forecast.TempLowLevel}" Font="Small" TextColor="{ex:ApplicationResource textColor}" />
+							<Label Text="Low level:" Style="{StaticResource smallHeaderStyle}" />
+							<Label Text="{Binding Forecast.TempLowLevel}" Style="{StaticResource textStyle}" />
 						</StackLayout>
 					</StackLayout>
 				</StackLayout>

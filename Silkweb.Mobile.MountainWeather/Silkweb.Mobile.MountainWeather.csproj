@@ -64,7 +64,6 @@
     <Compile Include="Models\Risk.cs" />
     <Compile Include="Models\WeatherPPN.cs" />
     <Compile Include="Models\WxPeriod.cs" />
-    <Compile Include="Behaviors\ItemsSourceBehavior.cs" />
     <Compile Include="Extensions\ImageResourceExtension.cs" />
     <Compile Include="Models\WeatherCodes.cs" />
     <Compile Include="Views\OutlookView.xaml.cs">

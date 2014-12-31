@@ -2,14 +2,14 @@
 using Xamarin.Forms;
 using System.Collections;
 
-namespace Silkweb.Mobile.MountainWeather.Behaviors
+namespace Silkweb.Mobile.Core.Behaviors
 {
     public class ItemsSourceBehavior : Behavior<StackLayout>
     {
         private StackLayout _associatedObject;
 
         public static readonly BindableProperty ItemsSourceProperty = 
-            BindableProperty.Create<ItemsSourceBehavior,IList>(p => p.ItemsSource, default(IList), BindingMode.TwoWay, null, ItemsSourceChanged);
+            BindableProperty.Create<ItemsSourceBehavior, IList>(p => p.ItemsSource, default(IList), BindingMode.Default, null, ItemsSourceChanged);
 
         public IList ItemsSource
         { 
@@ -18,7 +18,7 @@ namespace Silkweb.Mobile.MountainWeather.Behaviors
         }
 
         public static readonly BindableProperty ItemTemplateProperty = 
-            BindableProperty.Create<ItemsSourceBehavior,DataTemplate>(p => p.ItemTemplate, default(DataTemplate));
+            BindableProperty.Create<ItemsSourceBehavior, DataTemplate>(p => p.ItemTemplate, default(DataTemplate));
 
         public DataTemplate ItemTemplate
         { 
@@ -54,6 +54,7 @@ namespace Silkweb.Mobile.MountainWeather.Behaviors
         protected override void OnAttachedTo(StackLayout bindable)
         {
             _associatedObject = bindable;
+            base.OnAttachedTo(bindable);
         }
     }
 }

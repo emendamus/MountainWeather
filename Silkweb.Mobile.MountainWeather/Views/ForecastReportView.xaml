@@ -8,11 +8,9 @@
 	xmlns:cc="clr-namespace:Silkweb.Mobile.Core.Converters;assembly=Silkweb.Mobile.Core" 
 	xmlns:v="clr-namespace:Silkweb.Mobile.MountainWeather.Views;assembly=Silkweb.Mobile.MountainWeather" 
 	xmlns:vm="clr-namespace:Silkweb.Mobile.MountainWeather.ViewModels;assembly=Silkweb.Mobile.MountainWeather" 
-	xmlns:c="clr-namespace:Silkweb.Mobile.MountainWeather.Converters;assembly=Silkweb.Mobile.MountainWeather" 
 	Title="{Binding Title}" BackgroundColor="{ex:ApplicationResource backgroundColor}">
 	<ContentPage.Resources>
 		<ResourceDictionary>
-			<c:SelectedColorConverter x:Key="selectedColorConverter" SelectedColor="Transparent" UnSelectedColor="{ex:ApplicationResource highlightColor}" />
 			<cc:DateTimeToStringConverter x:Key="dateTimeConverter" />
 			<cv:TemplateSelector x:Key="templateSelector">
 				<cv:TemplateSelector.Templates>
@@ -32,9 +30,19 @@
 					</cv:DataTemplateWrapper>
 				</cv:TemplateSelector.Templates>
 			</cv:TemplateSelector>
+
+			<Style x:Key="tabGridStyle" TargetType="Grid">
+				<Setter Property="BackgroundColor" Value="{StaticResource highlightColor}" />
+				<Style.Triggers>
+					<DataTrigger Binding="{Binding IsSelected}" TargetType="Grid" Value="True">
+						<Setter Property="BackgroundColor" Value="Transparent" />
+					</DataTrigger>
+				</Style.Triggers>
+			</Style>
+
 			<DataTemplate x:Key="itemTemplate">
 				<Grid Padding="1">
-					<Grid WidthRequest="100" HeightRequest="100" BackgroundColor="{Binding IsSelected, Converter={StaticResource selectedColorConverter}}">
+					<Grid WidthRequest="100" HeightRequest="100" Style="{StaticResource tabGridStyle}">
 						<StackLayout Padding="5" Spacing="0">
 							<Label Text="{Binding Date, StringFormat='{0:ddd}'}" Font="Mirco" VerticalOptions="Start" HorizontalOptions="Start" TextColor="{ex:ApplicationResource textColor}" />
 							<Label Text="{Binding Date, Converter={StaticResource dateTimeConverter}, ConverterParameter='d{0} MMM'}" Font="Mirco" VerticalOptions="Start" HorizontalOptions="Start" TextColor="{ex:ApplicationResource textColor}" />
